@@ -1,0 +1,57 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/index/index"
+		},
+		{
+			"path": "pages/city/city"
+		},
+		{
+			"path": "pages/detail/detail"
+		},
+		{
+			"path": "pages/personal/personal"
+		},
+		{
+			"path": "pages/collectList/collectList"
+		}
+	],
+	/**
+	 * globalStyle 全局样式
+	 * 	navigationBarTitleText 导航条文字内容
+	 * 	navigationBarTextStyle 导航条文字颜色
+	 * 	navigationBarBackgroundColor 导航条背景色
+	 */
+	"globalStyle": {
+		"navigationBarTitleText": "收藏系统",
+		"navigationBarTextStyle": "white",
+		"navigationBarBackgroundColor": "#00ACEC"
+	},
+	/* condition 模式配置，仅开发期间生效 
+		list 模式列表
+			name 模式名称
+			path 启动页面，必选
+			query 启动参数，在页面的onLoad函数里面得到，如"id=96"
+	*/
+	"condition": {
+		"list": [
+			{
+				"name": "city",
+				"path": "pages/city/city"
+			},
+			{
+				"name": "detail",
+				"path": "pages/detail/detail",
+				"query": "id=47"
+			},
+			{
+				"name": "personal",
+				"path": "pages/personal/personal"
+			},
+			{
+				"name": "collectList",
+				"path": "pages/collectList/collectList"
+			}
+		]
+	}
+}

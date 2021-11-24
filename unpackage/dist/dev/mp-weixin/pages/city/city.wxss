@@ -1,0 +1,85 @@
+
+.location {
+	display: flex;
+	width: 750rpx;
+	height: 90rpx;
+	align-items: center;
+}
+
+/* 城市标题 */
+.city-title {
+	font-size: 24rpx;
+	color: #00acec;
+	margin-top: 20rpx;
+	margin-left: 30rpx;
+	margin-bottom: 18rpx;
+}
+.chiose-city {
+	font-size: 24rpx;
+	margin-left: 30rpx;
+	margin-right: 20rpx;
+}
+.gps {
+	color: #c0c0c0;
+	font-size: 20rpx;
+}
+.hot-city {
+	display: flex;
+	flex-direction: column;
+	width: 750rpx;
+	height: 400rpx;
+	border-bottom: 1px dashed #ddd;
+	border-top: 1px dashed #ddd;
+	margin-bottom: 20rpx;
+}
+.hot-city-container {
+	margin-left: 28rpx;
+	margin-right: 70rpx;
+}
+.hot-city-container view {
+	width: 200rpx;
+	height: 60rpx;
+	background: white;
+	float: left;
+	text-align: center;
+	margin-right: 8rpx;
+	margin-top: 8rpx;
+	border: 1px solid #00acec;
+	border-radius: 6rpx;
+	line-height: 60rpx;
+	font-size: 24rpx;
+}
+.letter {
+	color: #aeaeae;
+	font-size: 22rpx;
+	margin-left: 30rpx;
+	margin-top: 6rpx;
+}
+.city-ele {
+	margin-left: 28rpx;
+	margin-right: 68rpx;
+	height: 70rpx;
+	border-bottom: 1px dashed #ddd;
+	line-height: 70rpx;
+	font-size: 24rpx;
+}
+
+/* 右侧的字母 */
+.right-letter {
+	width: 40rpx;
+	position: fixed;
+	right: 20rpx;
+	top: 200rpx;
+	display: flex;
+	flex-direction: column;
+	font-size: 18rpx;
+	color: #515b67;
+}
+.right-letter text {
+	text-align: center;
+	margin-bottom: 9rpx;
+}
+.scrollView {
+	height: 1334rpx;
+}
+

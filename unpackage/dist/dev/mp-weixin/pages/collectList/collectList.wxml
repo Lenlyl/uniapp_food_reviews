@@ -1,0 +1,1 @@
+<view><shop-list vue-id="63b838ae-1" title="收藏列表" list="{{shops}}" loading="{{loading}}" bind:__l="__l"></shop-list></view>

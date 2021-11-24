@@ -1,0 +1,1 @@
+<view class="starContainer"><block wx:for="{{starArr}}" wx:for-item="item" wx:for-index="key" wx:key="key"><image class="star-img" src="{{'/static/images/b-'+item+'.png'}}"></image></block></view>

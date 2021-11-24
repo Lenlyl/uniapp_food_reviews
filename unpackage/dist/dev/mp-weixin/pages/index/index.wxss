@@ -1,0 +1,56 @@
+
+.home_container {
+	width: 750rpx;
+	height: 300rpx;
+	background: red;
+}
+.title_content {
+	width: 750rpx;
+	height: 80rpx;
+	background: #00acec;
+	color: #fff;
+	font-size: 24rpx;
+	padding-top: 24rpx;
+}
+.bar_title {
+	color: white;
+	margin-top: 60rpx;
+	margin-left: 34.5rpx;
+	font-size: 28rpx;
+}
+.area_name {
+	float: left;
+	margin-left: 36rpx;
+	margin-right: 9rpx;
+}
+.downIcon {
+	width: 18rpx;
+	height: 10rpx;
+}
+.people {
+	float: right;
+	margin-right: 28rpx;
+}
+.people-img {
+	width: 48rpx;
+	height: 48rpx;
+}
+.menu_content {
+	width: 750rpx;
+	height: 198rpx;
+	display: flex;
+	flex-direction: row;
+}
+.menu_item {
+	flex: 1;
+	text-align: center;
+}
+.menu_item image {
+	width: 88rpx;
+	height: 88rpx;
+	margin: 20rpx 20rpx;
+}
+.menu_item text {
+	font-size: 24rpx;
+}
+

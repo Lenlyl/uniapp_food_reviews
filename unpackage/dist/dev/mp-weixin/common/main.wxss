@@ -1,0 +1,38 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*每个页面公共css */
+
+/* 灰色分割线 */
+.line_gray {
+	width: 750rpx;
+	height: 15rpx;
+	background: #f6f6f6;
+	border-top: 1px solid #ddd;
+}
+

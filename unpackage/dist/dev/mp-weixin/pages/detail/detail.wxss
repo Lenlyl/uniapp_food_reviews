@@ -1,0 +1,225 @@
+
+.detail_container {
+		display: flex;
+		flex-direction: column;
+		padding-top: 40rpx;
+		padding-bottom: 86rpx;
+}
+.container_up {
+		padding-left: 32rpx;
+		padding-right: 32rpx;
+}
+.detail_content {
+		display: flex;
+		border-bottom: 1px solid #ddd;
+		padding-bottom: 20rpx;
+}
+.imgContainer {
+		border: 1rpx solid #ddd;
+		padding: 1rpx;
+		border-radius: 15rpx;
+		margin-right: 32rpx;
+		height: 212rpx;
+}
+.imgContainer image {
+		width: 210rpx;
+		height: 210rpx;
+		border-radius: 15rpx;
+}
+.store {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+}
+.store_title {
+		font-weight: bold;
+		font-size: 32rpx;
+}
+.store_price {
+		color: #7b7b7b;
+		display: flex;
+		flex-direction: row;
+		height: 36rpx;
+		align-items: center;
+}
+.text-tiao {
+		font-size: 24rpx;
+		padding-left: 15rpx;
+}
+.text-price {
+		font-size: 26rpx;
+		font-weight: bold;
+		padding-left: 15rpx;
+		color: #ff6633;
+}
+.store_taste {
+		font-size: 26rpx;
+		color: #868686;
+		font-weight: 200;
+}
+.store_type {
+		font-size: 26rpx;
+		color: #868686;
+		font-weight: 200;
+}
+.content-show {
+		border-bottom: 1px solid #ddd;
+		font-size: 24rpx;
+}
+.content-show image {
+		width: 24rpx;
+		height: 24rpx;
+		padding-right: 12rpx;
+}
+.content-show image:nth-child(2) {
+		margin-left: 42rpx;
+}
+.content-show image:nth-child(3) {
+		margin-left: 42rpx;
+}
+.content-show image:nth-child(4) {
+		margin-left: 60rpx;
+}
+.local {
+		height: 103rpx;
+		display: block;
+		line-height: 103rpx;
+}
+.position {
+		display: flex;
+		flex-direction: row;
+		margin-top: 24rpx;
+		margin-bottom: 24rpx;
+}
+.position image {
+		width: 42rpx;
+		height: 28rpx;
+		margin-top: 8rpx;
+		margin-right: 10rpx;
+}
+.text-content {}
+.text-pos {
+		font-size: 24rpx;
+		line-height: 32rpx;
+}
+
+	/* .text-content text {
+  font-size: 30upx;
+  color: #111111;
+  font-weight: 200;
+} */
+.phone-container {
+		width: 96rpx;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		height: 60rpx;
+		margin-top: 30rpx;
+		margin-left: 48rpx;
+		border-left: 1px solid #e1e1e1;
+}
+.phone-container image {
+		width: 32rpx;
+		height: 35rpx;
+		padding-left: 24rpx;
+}
+
+	/* 小吃排行 */
+.rank {
+		height: 110rpx;
+		width: 750rpx;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		font-size: 28rpx;
+}
+.rank-img {
+		width: 40rpx;
+		height: 40rpx;
+		margin-left: 28rpx;
+}
+.rank-more {
+		width: 17rpx;
+		height: 28rpx;
+		margin-left: 210rpx;
+}
+
+	/* 团列表 */
+.group-buying {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+}
+.group-buying-img {
+		width: 40rpx;
+		height: 40rpx;
+		margin-left: 28rpx;
+		margin-top: 28rpx;
+		position: absolute;
+}
+
+	/* 食物显示 */
+.food-show {
+		width: 120rpx;
+		height: 120rpx;
+		border-radius: 15rpx;
+		margin-right: 21rpx;
+}
+.show-list-item {
+		display: flex;
+		flex-direction: row;
+		margin-left: 88rpx;
+		margin-top: 26rpx;
+		border-bottom: 1px solid #e1e1e1;
+		padding-bottom: 17rpx;
+}
+.food-detail {
+		font-size: 24rpx;
+		color: #000;
+		line-height: 48rpx;
+}
+.now-price {
+		font-size: 28rpx;
+		color: #ff6633;
+		margin-right: 14rpx;
+		font-weight: bold;
+}
+.original-price {
+		text-decoration: line-through;
+		font-size: 24rpx;
+		color: #777777;
+}
+.text-container {}
+.food-detail text {
+		margin-left: 40rpx;
+}
+
+	/* 底部样式 */
+.footer {
+		display: flex;
+		flex-direction: row;
+		position: fixed;
+		bottom: 0;
+		width: 100%;
+		height: 86rpx;
+		background: #fcfcfb;
+		align-items: center;
+		color: #707070;
+}
+.footer view {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		height: 34rpx;
+		font-size: 28rpx;
+}
+.footer view:nth-child(1) {
+		border-right: 1px solid;
+}
+.footer image {
+		width: 34rpx;
+		height: 34rpx;
+		vertical-align: middle;
+		margin-right: 10rpx;
+}
+
