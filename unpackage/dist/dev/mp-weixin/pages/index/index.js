@@ -227,7 +227,7 @@ getApp(),globalData = _getApp.globalData;var _default =
    */
   data: function data() {
     return {
-      address: '加载中……',
+      address: '加载中…',
       shops: [],
       loading: false,
       page: 0,
@@ -247,21 +247,21 @@ getApp(),globalData = _getApp.globalData;var _default =
                            * 			getOpenidByFn()获取openid 并存储到本地
                            */
   onLoad: function onLoad() {
-    this.getUserInfo().
-    then(function (userInfo) {
-      console.log(userInfo);
-      if (userInfo) {
-        globalData.userInfo = userInfo;
-      } else {
-        uni.showModal({
-          title: '请先登录!' });
-
-      }
-    });
+    // this.getUserInfo()
+    // 	.then((userInfo) => {
+    // 		console.log(userInfo)
+    // 		if (userInfo) {
+    // 			globalData.userInfo = userInfo;
+    // 		} else {
+    // 			uni.showModal({
+    // 				title:'请先登录!'
+    // 			})
+    // 		}
+    // 	});
 
     var openid = uni.getStorageSync('openid');
     if (!openid) {
-      this.getOpenidByFn().
+      this.getOpenid().
       then(function (openid) {
         uni.setStorageSync('openid', openid);
       });
@@ -284,8 +284,24 @@ getApp(),globalData = _getApp.globalData;var _default =
       * 				将address写入全局
       * 				updateShops更新店铺列表
       */
-  onShow: function onShow() {
+  onShow: function onShow() {var _this = this;
+    this.getLocation().
+    then(function (res) {
+      _this.getPostion(res).
+      then(function (city) {
+        console.log(city);
+        _this.address = city;
+        globalData.address = city;
 
+        if (_this.shops.length == 0) {
+          _this.getShops().
+          then(function (data) {
+            console.log(data);
+            _this.shops = data;
+          });
+        }
+      });
+    });
   },
 
   /**
@@ -315,14 +331,47 @@ getApp(),globalData = _getApp.globalData;var _default =
         * 		success 成功回调
         * 		fail 失败回调
         */
-    getOpenidByFn: function getOpenidByFn() {
+    getOpenid: function getOpenid() {
+      return new Promise(function (resolve, reject) {
+        wx.cloud.callFunction({
+          name: "login",
+          success: function success(_ref)
 
+
+
+          {var openid = _ref.result.openid;
+            console.log(openid, 'openid');
+            resolve(openid);
+          },
+          fail: function fail(err) {
+            console.log(err);
+            reject(err);
+          },
+          complete: function complete() {
+            resolve();
+          } });
+
+      });
     },
     /* uni.getLocation() 获取当前经纬度
        	https://uniapp.dcloud.io/api/location/location
         */
     getLocation: function getLocation() {
+      return new Promise(function (resolve, reject) {
+        uni.getLocation({
+          success: function success(res) {
+            // console.log(res);
+            resolve(res);
+          },
+          fail: function fail(err) {
+            console.log(err);
+            reject(err);
+          },
+          complete: function complete(res) {
+            reject(res);
+          } });
 
+      });
     },
     /**
         * map.reverseGeocoder({}) 反解析经纬度
@@ -331,16 +380,15 @@ getApp(),globalData = _getApp.globalData;var _default =
         * 		获取城市 result.result.address_component.city
         * 		https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder
         */
-    analysis: function analysis(_ref)
+    getPostion: function getPostion(_ref2)
 
 
-    {var latitude = _ref.latitude,longitude = _ref.longitude;
+    {var latitude = _ref2.latitude,longitude = _ref2.longitude;
 
       // var success = function(data) { 
       // 	console.log('百度地图',data);
       // } 
-
-      return new Promise(function (resolve) {
+      return new Promise(function (resolve, reject) {
 
         // BMap.regeocoding({
         // 	success: success
@@ -351,14 +399,21 @@ getApp(),globalData = _getApp.globalData;var _default =
             latitude: latitude,
             longitude: longitude },
 
-          success: function success(_ref2)
+          success: function success(_ref3)
 
 
 
 
 
-          {var city = _ref2.result.address_component.city;
+          {var city = _ref3.result.address_component.city;
             resolve(city);
+          },
+          fail: function fail(err) {
+            console.log(err);
+            reject(err);
+          },
+          complete: function complete(res) {
+            reject(res);
           } });
 
       });
@@ -371,17 +426,17 @@ getApp(),globalData = _getApp.globalData;var _default =
         * 			将现有店铺列表和新获取的店铺列表合并
         * 			page++
         */
-    updateShops: function updateShops() {var _this = this;
+    updateShops: function updateShops() {var _this2 = this;
       this.getShops().
-      then(function (data) {return _this.parseShops(data);}).
+      then(function (data) {return _this2.parseShops(data);}).
       then(function (data) {
         // console.log(data);
         if (data.length) {
-          _this.shops = [].concat(_toConsumableArray(_this.shops), _toConsumableArray(data));
-          _this.page++;
+          _this2.shops = [].concat(_toConsumableArray(_this2.shops), _toConsumableArray(data));
+          _this2.page++;
 
           if (data.length < 5) {
-            _this.loadOff = false;
+            _this2.loadOff = false;
           }
         }
       });
@@ -397,24 +452,24 @@ getApp(),globalData = _getApp.globalData;var _default =
        			success 返回{data} 数据
        			complete loading false
        */
-    getShops: function getShops() {var _this2 = this;
+    getShops: function getShops() {var _this3 = this;
       console.log('-----getShops----');
       this.loading = true;
       var num = 5;
       var start = this.page * num;
       return new Promise(function (resolve) {
-        db.collection('favorLex').
+        db.collection('favorList').
         where({
-          place: _this2.address }).
+          place: _this3.address }).
 
         skip(start).
         limit(num).
         get({
           success: function success(res) {
-            resolve(res.data);
+            resolve(_this3.parseShops(res.data));
           },
           complete: function complete() {
-            _this2.loading = false;
+            _this3.loading = false;
           } });
 
       });

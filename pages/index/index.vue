@@ -89,7 +89,7 @@
 		 */
 		data() {
 			return {
-				address: '加载中……',
+				address: '加载中…',
 				shops: [],
 				loading: false,
 				page: 0,
@@ -109,21 +109,21 @@
 		 * 			getOpenidByFn()获取openid 并存储到本地
 		 */
 		onLoad() {
-			this.getUserInfo()
-				.then((userInfo) => {
-					console.log(userInfo)
-					if (userInfo) {
-						globalData.userInfo = userInfo;
-					} else {
-						uni.showModal({
-							title:'请先登录!'
-						})
-					}
-				});
+			// this.getUserInfo()
+			// 	.then((userInfo) => {
+			// 		console.log(userInfo)
+			// 		if (userInfo) {
+			// 			globalData.userInfo = userInfo;
+			// 		} else {
+			// 			uni.showModal({
+			// 				title:'请先登录!'
+			// 			})
+			// 		}
+			// 	});
 
 			const openid = uni.getStorageSync('openid');
 			if (!openid) {
-				this.getOpenidByFn()
+				this.getOpenid()
 					.then((openid) => {
 						uni.setStorageSync('openid', openid);
 					});
@@ -147,7 +147,23 @@
 		 * 				updateShops更新店铺列表
 		 */
 		onShow() {
+			this.getLocation()
+				.then(res => {
+					this.getPostion(res)
+						.then(city => {
+							console.log(city)
+							this.address = city;
+							globalData.address = city;
 			
+							if(this.shops.length == 0){
+								this.getShops()
+									.then(data => {
+										console.log(data);
+										this.shops = data;
+									});
+							}
+						});
+				});
 		},
 
 		/**
@@ -168,7 +184,7 @@
 				https://uniapp.dcloud.io/api/plugins/login?id=getuserinfo
 			*/
 			getUserInfo() {
-				
+
 			},
 			/**
 			 * 通过云函数获取openid，缓存到本地
@@ -177,14 +193,47 @@
 			 * 		success 成功回调
 			 * 		fail 失败回调
 			 */
-			getOpenidByFn() {
-
+			getOpenid() {
+				return new Promise((resolve, reject) => {
+					wx.cloud.callFunction({
+						name: "login",
+						success: ({
+							result: {
+								openid
+							}
+						}) => {
+							console.log(openid, 'openid');
+							resolve(openid);
+						},
+						fail: err => {
+							console.log(err)
+							reject(err);
+						},
+						complete: () => {
+							resolve();
+						}
+					})
+				})
 			},
 			/* uni.getLocation() 获取当前经纬度
 				https://uniapp.dcloud.io/api/location/location
 			 */
 			getLocation() {
-
+				return new Promise((resolve, reject) => {
+					uni.getLocation({
+						success(res) {
+							// console.log(res);
+							resolve(res);
+						},
+						fail(err) {
+							console.log(err)
+							reject(err)
+						},
+						complete(res) {
+							reject(res)
+						}
+					})
+				})
 			},
 			/**
 			 * map.reverseGeocoder({}) 反解析经纬度
@@ -193,7 +242,7 @@
 			 * 		获取城市 result.result.address_component.city
 			 * 		https://lbs.qq.com/miniProgram/jsSdk/jsSdkGuide/methodReverseGeocoder
 			 */
-			analysis({
+			getPostion({
 				latitude,
 				longitude
 			}) {
@@ -201,8 +250,7 @@
 				// var success = function(data) { 
 				// 	console.log('百度地图',data);
 				// } 
-
-				return new Promise((resolve) => {
+				return new Promise((resolve, reject) => {
 
 					// BMap.regeocoding({
 					// 	success: success
@@ -221,6 +269,13 @@
 							}
 						}) => {
 							resolve(city);
+						},
+						fail(err) {
+							console.log(err)
+							reject(err)
+						},
+						complete(res) {
+							reject(res)
 						}
 					})
 				});
@@ -265,7 +320,7 @@
 				const num = 5;
 				const start = this.page * num;
 				return new Promise((resolve) => {
-					db.collection('favorLex')
+					db.collection('favorList')
 						.where({
 							place: this.address
 						})
@@ -273,7 +328,7 @@
 						.limit(num)
 						.get({
 							success: (res) => {
-								resolve(res.data);
+								resolve(this.parseShops(res.data));
 							},
 							complete: () => {
 								this.loading = false;
